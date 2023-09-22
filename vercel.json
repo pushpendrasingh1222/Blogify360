@@ -1,0 +1,26 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "client/package.json",
+        "use": "@vercel/static-build",
+        "config": {
+          "distDir": "client/build"
+        }
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*).(js|css|map|ico)",
+        "dest": "/client/build/$1.$2",
+        "headers": {
+          "cache-control": "public, max-age=31536000, immutable"
+        }
+      },
+      {
+        "src": "/.*",
+        "dest": "/client/build/index.html"
+      }
+    ]
+  }
+  
